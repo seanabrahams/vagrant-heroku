@@ -2,6 +2,10 @@
 
 date > /etc/vagrant_box_build_time
 
+# Set timezone to UTC
+echo "Etc/UTC" | sudo tee /etc/timezone
+sudo dpkg-reconfigure --frontend noninteractive tzdata
+
 # Apt-install various things necessary for Ruby, guest additions,
 # etc., and remove optional things to trim down the machine.
 apt-get -y update
