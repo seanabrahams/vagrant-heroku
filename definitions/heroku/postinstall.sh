@@ -13,6 +13,7 @@ apt-get -y upgrade
 apt-get -y install linux-headers-$(uname -r) build-essential
 apt-get -y install zlib1g-dev libssl-dev libreadline5-dev
 apt-get -y install git-core vim
+apt-get -y install libyaml-dev
 
 # Apt-install python tools and libraries
 # libpq-dev lets us compile psycopg for Postgres
