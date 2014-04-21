@@ -24,24 +24,24 @@ apt-get -y install nfs-common
 
 # Install Ruby from source in /opt so that users of Vagrant
 # can install their own Rubies using packages or however.
-wget http://ftp.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p247.tar.bz2
-tar jxf ruby-2.0.0-p247.tar.bz2
-cd ruby-2.0.0-p247
+wget http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p451.tar.bz2
+tar jxf ruby-2.0.0-p451.tar.bz2
+cd ruby-2.0.0-p451
 ./configure --prefix=/opt/ruby
 make
 make install
 cd ..
-rm -rf ruby-2.0.0-p247*
+rm -rf ruby-2.0.0-p451*
 chown -R root:admin /opt/ruby
 chmod -R g+w /opt/ruby
 
-# Install RubyGems 2.0.3
-wget http://production.cf.rubygems.org/rubygems/rubygems-2.0.3.tgz
-tar xzf rubygems-2.0.3.tgz
-cd rubygems-2.0.3
+# Install RubyGems 2.0.14
+wget http://production.cf.rubygems.org/rubygems/rubygems-2.0.14.tgz
+tar xzf rubygems-2.0.14.tgz
+cd rubygems-2.0.14
 /opt/ruby/bin/ruby setup.rb
 cd ..
-rm -rf rubygems-2.0.3*
+rm -rf rubygems-2.0.14*
 
 # Installing chef & Puppet
 /opt/ruby/bin/gem install chef --no-ri --no-rdoc
@@ -63,15 +63,25 @@ pip install virtualenvwrapper
 echo "export WORKON_HOME=/home/vagrant/.virtualenvs" >> /home/vagrant/.bashrc
 echo "source /usr/local/bin/virtualenvwrapper.sh" >> /home/vagrant/.bashrc
 
-# Install PostgreSQL 9.2.4
-wget http://ftp.postgresql.org/pub/source/v9.2.4/postgresql-9.2.4.tar.bz2
-tar jxf postgresql-9.2.4.tar.bz2
-cd postgresql-9.2.4
-./configure --prefix=/usr
+#Install OSSP-UUID 1.6.2
+wget ftp://ftp.ossp.org/pkg/lib/uuid/uuid-1.6.2.tar.gz
+tar xzf uuid-1.6.2.tar.gz
+cd uuid-1.6.2
+./configure
+make
+make install
+cd ..
+rm -rf uuid-1.6.2
+
+# Install PostgreSQL 9.2.7
+wget http://ftp.postgresql.org/pub/source/v9.2.7/postgresql-9.2.7.tar.bz2
+tar jxf postgresql-9.2.7.tar.bz2
+cd postgresql-9.2.7
+./configure --prefix=/usr --with-ossp-uuid
 make world
 make install-world
 cd ..
-rm -rf postgresql-9.2.4*
+rm -rf postgresql-9.2.7*
 
 # Initialize postgres DB
 useradd -p postgres postgres
