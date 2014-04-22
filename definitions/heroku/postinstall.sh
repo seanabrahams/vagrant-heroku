@@ -174,6 +174,12 @@ echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale
 # Add 'vagrant' role
 su -c 'createuser vagrant -s' postgres
 
+# Create PTM databases and extensions
+su -c 'createdb ptm_development' postgres
+su -c 'createdb ptm_test' postgres
+su -c 'psql ptm_development -c "CREATE EXTENSION \"uuid-ossp\";"' postgres
+su -c 'psql ptm_test -c "CREATE EXTENSION \"uuid-ossp\";"' postgres
+
 echo "Adding a 2 sec delay to the interface up, to make the dhclient happy"
 echo "pre-up sleep 2" >> /etc/network/interfaces
 exit
