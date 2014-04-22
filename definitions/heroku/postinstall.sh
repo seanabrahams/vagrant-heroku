@@ -77,6 +77,7 @@ make
 make install
 cd ..
 rm -rf uuid-1.6.2
+rm -f uuid-1.6.2.tar.gz
 
 # Install PostgreSQL 9.2.7
 wget http://ftp.postgresql.org/pub/source/v9.2.7/postgresql-9.2.7.tar.bz2
