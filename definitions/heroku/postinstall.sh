@@ -157,7 +157,16 @@ wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 # Install some libraries
 apt-get -y install libxml2-dev libxslt-dev curl libcurl4-openssl-dev
 apt-get -y install imagemagick libmagickcore-dev libmagickwand-dev
+apt-get -y install chrpath libfontconfig1-dev # For PhantomJS
 apt-get clean
+
+# Add PhantomJS for Cucumber+Poltergeist acceptance testing
+wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.7-linux-x86_64.tar.bz2
+bzip2 -d phantomjs-1.9.7-linux-x86_64.tar.bz2
+tar -xf phantomjs-1.9.7-linux-x86_64.tar
+cp phantomjs-1.9.7-linux-x86_64/bin/phantomjs /usr/local/bin/.
+rm -rf phantomjs-1.9.7-linux-x86_64
+rm phantomjs-1.9.7-linux-x86_64.tar
 
 # Set locale
 echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale
